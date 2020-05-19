@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import reducer from "./reducer";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import NewTodoForm from "./NewTodoForm.js";
+import ClearAll from "./ClearAll.js";
+import TodoList from "./TodoList.js";
+import Layout from "./Layout";
+import { Typography } from "@material-ui/core";
 
-function App() {
+const store = createStore(reducer);
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Layout>
+        <Typography variant="h2">Redux Todo List</Typography>
+        <NewTodoForm />
+        <TodoList />
+        <ClearAll />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
+      </Layout>
+    </Provider>
   );
 }
-
-export default App;
